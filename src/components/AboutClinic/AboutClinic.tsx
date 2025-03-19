@@ -20,7 +20,7 @@ const AboutClinic = () => {
 
         {/* Content */}
         <p className="text-base sm:text-lg text-gray-600 mx-auto text-justify px-4 sm:px-6 md:px-8 leading-relaxed max-w-8xl">
-          At ScanXperts we specialize in dental X-rays and imaging
+          At ScanXperts we specialize in dental, Head & Neck X-rays and imaging
           services, including CBCT, OPG, ENT imaging, and more. Located in
           Kochi, Kerala, we offer cutting-edge diagnostic solutions with
           precision and care. We implement an innovative, patient-centered

@@ -85,7 +85,7 @@ const Hero = () => {
       <div className="w-full bg-lightGray py-8 sm:py-10 -mt-1">
         <div className="container mx-auto px-4 sm:px-6 md:px-8">
           <p className="text-gray-700 leading-relaxed text-base sm:text-lg max-w-6xl mx-auto text-justify text-left">
-            At ScanXpert, we provide advanced CBCT and digital X-ray imaging
+            At ScanXpert, we provide advanced CBCT and digital, Head & Neck X-ray imaging
             with expert precision. Our state-of-the-art facility in Kochi
             ensures accurate diagnostics for dental and ENT conditions,
             maintaining the highest standards of quality and patient care.

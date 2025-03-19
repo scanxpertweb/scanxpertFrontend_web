@@ -9,14 +9,14 @@ interface TeamMember {
     {
       image: "images/kamakshi.jpg",
       name: "Dr. Kamakshi Raina",
-      position: "Head Radiologist",
+      position: "Chief Radiologist",
       education: "BDS, MDS (Oral Medicine & Radiology), FAGE (Fellow of Academy of General Education)",
     },
     {
       image: "/images/kapilsir.jpeg",
       name: "Dr. Kapil Kishan Raina",
       position: "Senior Consultant",
-      education: "BDS, MD | Cert in Oral Implantology",
+      education: "BDS, MD (Alt. Med) | Cert in Oral Implantology",
     },
   ];
   
