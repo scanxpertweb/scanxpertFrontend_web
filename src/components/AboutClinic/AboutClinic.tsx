@@ -8,23 +8,23 @@ const AboutClinic = () => {
         <div className="flex items-center justify-center gap-3 sm:gap-4 md:gap-6 mb-4">
           <div className="h-[2px] w-12 sm:w-20 md:w-32 bg-darkGray"></div>
           <h2 className="text-2xl sm:text-3xl md:text-[40px] font-bold text-gray-900 text-center">
-            About Our <span className="text-primaryBlue">Clinic</span>
+            About Our <span className="text-primaryBlue">Center</span>
           </h2>
           <div className="h-[2px] w-12 sm:w-20 md:w-32 bg-darkGray"></div>
         </div>
 
         {/* Tagline */}
         <p className="text-center text-base sm:text-lg font-semibold text-gray-600 mb-4 sm:mb-6 px-4">
-          One-stop destination for advanced dental imaging
+          One-stop destination for advanced Dental, Head & Neck and ENT imaging
         </p>
 
         {/* Content */}
         <p className="text-base sm:text-lg text-gray-600 mx-auto text-justify px-4 sm:px-6 md:px-8 leading-relaxed max-w-8xl">
-          At ScanXperts we specialize in dental, Head & Neck X-rays and imaging
+          At ScanXperts we specialize in Dental, Head & Neck and ENT X-rays and imaging
           services, including CBCT, OPG, ENT imaging, and more. Located in
           Kochi, Kerala, we offer cutting-edge diagnostic solutions with
           precision and care. We implement an innovative, patient-centered
-          healthcare model through a network of family clinics. Our goal is to
+          healthcare model through a network of family Centers. Our goal is to
           provide high-quality, friendly, and trustworthy healthcare services,
           ensuring that every patient receives the best possible care.
         </p>

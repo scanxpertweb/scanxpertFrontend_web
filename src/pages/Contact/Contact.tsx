@@ -47,8 +47,8 @@ const Contact = () => {
                 {/* Email */}
                 <div className="flex items-center space-x-3">
                   <Mail className="text-accentOrange" size={24} />
-                  <a href="mailto:contact@scanxperts.com" className="text-gray-700 text-lg hover:text-primaryBlue transition">
-                    contact@scanxperts.com
+                  <a href="mailto:scan.xperts@gmail.com" className="text-gray-700 text-lg hover:text-primaryBlue transition">
+                    scan.xperts@gmail.com
                   </a>
                 </div>
 

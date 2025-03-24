@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import { type Config } from "tailwindcss";
 import colors from "./src/config/colors";
 

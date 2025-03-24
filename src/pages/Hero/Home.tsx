@@ -18,13 +18,14 @@ const Hero = () => {
           {/* Left Side - Text Content */}
           <div className="w-full md:w-2/5 text-left p-6 sm:p-8 md:pl-0 xl:pl-4 xl:translate-x-[2%] 2xl:translate-x-[4%]">
             <h1 className="text-[1.8rem] sm:text-[2.1rem] md:text-[2.55rem] font-bold text-gray-900 mb-4 sm:mb-6 leading-relaxed uppercase">
-            Advanced Imaging Solutions for Dental, Head & Neck Care!            </h1>
+              Advanced Imaging Solutions for Dental, Head & Neck Care!{" "}
+            </h1>
             <p className="text-base sm:text-lg text-gray-600 mb-6 sm:mb-8 leading-relaxed text-justify">
-              Experience precision in dental and ENT imaging with our advanced
-              X-ray technology like Digital CBCT, OPG etc. We provide safe,
-              accurate, and high-resolution diagnostics for the best treatment.
-              Trust us for clarity, comfort, and care. Your health deserves the
-              best!
+              Experience precision in Dental, Head & Neck and ENT imaging with
+              our advanced X-ray technology like Digital CBCT, OPG , Ceph, TMJ
+              views etc. We provide safe, accurate, and high-resolution
+              diagnostics for the best treatment. Trust us for clarity, comfort,
+              and care. Your health deserves the best!
             </p>
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 md:gap-6">
               <a
@@ -85,10 +86,11 @@ const Hero = () => {
       <div className="w-full bg-lightGray py-8 sm:py-10 -mt-1">
         <div className="container mx-auto px-4 sm:px-6 md:px-8">
           <p className="text-gray-700 leading-relaxed text-base sm:text-lg max-w-6xl mx-auto text-justify text-left">
-            At ScanXpert, we provide advanced CBCT and digital, Head & Neck X-ray imaging
-            with expert precision. Our state-of-the-art facility in Kochi
-            ensures accurate diagnostics for dental and ENT conditions,
-            maintaining the highest standards of quality and patient care.
+            At ScanXperts, we provide advanced Dental, Head & Neck and ENT X-ray
+            imaging with expert precision. Our state-of-the-art facility in
+            Kochi ensures accurate diagnostics for dental, head & neck and ENT
+            conditions, maintaining the highest standards of quality and patient
+            care.
           </p>
         </div>
       </div>
