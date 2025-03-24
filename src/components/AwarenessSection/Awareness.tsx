@@ -25,7 +25,7 @@ const CBCTAwareness = () => {
 
         {/* Tagline */}
         <p className="text-center text-base sm:text-lg font-semibold text-gray-600 mb-8 sm:mb-12 px-4">
-          Advanced 3D imaging for precise dental diagnostics
+          Advanced 3D imaging for precise Dental, Head & Neck and ENT diagnostics
         </p>
 
         {/* Content Container */}
@@ -33,9 +33,9 @@ const CBCTAwareness = () => {
           {/* Left side - Text Content */}
           <div className="w-full md:w-1/2">
             <p className="text-base sm:text-lg text-gray-600 leading-relaxed text-justify">
-              A CBCT scanner (Cone Beam Computed Tomography) is a cutting-edge
+              A CBCT Scan (Cone Beam Computed Tomography) is a cutting-edge
               imaging technology that captures high-resolution 3D images of the
-              mouth, including teeth, jaws, soft tissue, and bones. Using
+              mouth, including teeth, jaws, and bones. Using
               minimal radiation, it offers a safer, more advanced alternative to
               traditional X-rays. Essential for complex treatments like
               implants, orthodontics, and oral surgery, CBCT enhances diagnosis,
@@ -53,6 +53,10 @@ const CBCTAwareness = () => {
                   detailed 3D images for accurate diagnosis
                 </li>
                 <li className="flex items-center gap-2">
+                  <span className="text-primaryBlue">•</span> Substantially
+                  lower radiation exposure for a safer imaging experience
+                </li>
+                <li className="flex items-center gap-2">
                   <span className="text-primaryBlue">•</span> Minimally invasive
                   and ideal for anxious patients
                 </li>
@@ -63,10 +67,6 @@ const CBCTAwareness = () => {
                 <li className="flex items-center gap-2">
                   <span className="text-primaryBlue">•</span> Helps patients
                   understand their treatment plans better
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="text-primaryBlue">•</span> Uses low radiation
-                  exposure for a safer imaging experience
                 </li>
                 <li className="flex items-center gap-2">
                   <span className="text-primaryBlue">•</span> Enables better

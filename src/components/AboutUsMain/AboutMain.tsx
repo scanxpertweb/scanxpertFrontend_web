@@ -13,7 +13,7 @@ const AboutMain = () => {
         {/* Content */}
         <p className="text-base sm:text-lg text-gray-600 mx-auto text-justify px-4 sm:px-6 md:px-8 leading-relaxed max-w-8xl">
           At ScanXperts, we specialize in advanced dental, Head & Neck   X-rays and imaging
-          services, including CBCT, OPG, ENT imaging, and more. Located in
+          services, including CBCT, OPG, ENT imaging, TMJ Imaging and more. Located in
           Kochi, Kerala, our clinic is equipped with state-of-the-art diagnostic
           technology, ensuring high-precision scans that assist in accurate
           diagnoses and treatment planning. Our goal is to provide high-quality,
@@ -22,7 +22,7 @@ const AboutMain = () => {
         </p>
 
         <p className="text-base sm:text-lg text-gray-600 mx-auto text-justify px-4 sm:px-6 md:px-8 leading-relaxed max-w-8xl mt-4">
-          As pioneers in CBCT technology in South India, we are dedicated to
+          As one of the pioneers in CBCT technology in South India, we are dedicated to
           making advanced dental imaging accessible and affordable for
           communities across Kerala and neighboring states. Our state-of-the-art
           CBCT services enable precise 3D imaging for complex dental procedures,
