@@ -12,32 +12,39 @@ const MakesUsDifferent = () => {
 
             {/* Short Intro Paragraph */}
             <p className="text-lg text-gray-600 mb-6 text-justify">
-              At ScanXperts, we have a state-of-the-art testing laboratory that
-              adheres to global standards and is managed by a team of highly
-              skilled experts. Together, we fulfill the unique diagnostic
-              testing requirements of our patients with precision and care.
+              At ScanXperts, we have a state-of-the-art European Scanning
+              equipments and world class diagnostic facility that adheres to
+              global standards and is managed by a team of highly skilled
+              experts. Together, we fulfill the unique diagnostic testing
+              requirements of our patients with precision and care.
             </p>
 
             {/* Key Points */}
             <div className="space-y-4">
               <p className="text-base sm:text-lg text-gray-600 leading-relaxed text-justify">
-                <span className="text-accentOrange">•</span> <strong>State-of-the-Art
-                Facility:</strong> Modern equipment and expert staff ensuring precision care.
+                <span className="text-accentOrange">•</span>{" "}
+                <strong>State-of-the-Art Facility:</strong> Modern equipment and
+                expert staff ensuring precision care.
               </p>
               <p className="text-base sm:text-lg text-gray-600 leading-relaxed text-justify">
-                <span className="text-accentOrange">•</span> <strong>Comprehensive
-                Solutions:</strong> Wide range of specialized dental and ENT diagnostic services.
+                <span className="text-accentOrange">•</span>{" "}
+                <strong>Comprehensive Solutions:</strong> Wide range of
+                specialized dental and ENT diagnostic services.
               </p>
               <p className="text-base sm:text-lg text-gray-600 leading-relaxed text-justify">
-                <span className="text-accentOrange">•</span> <strong>Quality
-                Management:</strong> Rigorous quality control for reliable results.
+                <span className="text-accentOrange">•</span>{" "}
+                <strong>Quality Management:</strong> Rigorous quality control
+                for reliable results.
               </p>
               <p className="text-base sm:text-lg text-gray-600 leading-relaxed text-justify">
-                <span className="text-accentOrange">•</span> <strong>Quick
-                Results:</strong> Fast and accurate diagnostic reports.
+                <span className="text-accentOrange">•</span>{" "}
+                <strong>Quick Results:</strong> Fast and accurate diagnostic
+                reports.
               </p>
               <p className="text-base sm:text-lg text-gray-600 leading-relaxed text-justify">
-                <span className="text-accentOrange">•</span> <strong>Affordable Care:</strong> Quality healthcare at accessible prices.
+                <span className="text-accentOrange">•</span>{" "}
+                <strong>Affordable Care:</strong> Quality healthcare at
+                accessible prices.
               </p>
             </div>
           </div>
@@ -53,7 +60,7 @@ const MakesUsDifferent = () => {
               Dr. Kamakshi Raina
             </p>
             <p className="mt-1 text-gray-600 text-center text-sm ">
-              Radiologist
+             Founder, Chief Radiologist
             </p>
           </div>
         </div>

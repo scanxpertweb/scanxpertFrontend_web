@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import e from "express";
 import mongoose from "mongoose";
 

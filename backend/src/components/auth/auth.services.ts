@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import admin from '../firebase/admin';
 import * as UserRepo from './auth.repository';
 import { findRole } from '../role/role.repository';
@@ -19,7 +21,7 @@ export const checkOrCreateUser = async (
   const role = await findRole();
 
   // Find the role for 'user' and get a single _id
-  const userRole = role.find((r) => r.name === "user"); 
+  const userRole = role.find((r: any) => r.name === "user"); 
   const roleId = userRole ? userRole._id : undefined; 
 
   if (!roleId) throw new Error("User role not found"); 

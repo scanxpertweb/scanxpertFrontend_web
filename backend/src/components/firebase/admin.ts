@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import admin, { ServiceAccount } from 'firebase-admin';
 import path from 'path';
 import { serviceAccount } from './service';
