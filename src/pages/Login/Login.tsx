@@ -5,6 +5,7 @@ import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import { auth } from "./firebase";
 import axios from "axios";
 import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 declare global {
   interface Window {
@@ -21,6 +22,8 @@ const Login = () => {
   const [_token, setToken] = useState("");
   const [formData, setFormData] = useState({ name: "", age: "", sex: "" });
   const recaptchaRef = useRef<HTMLDivElement>(null);
+
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
   const setupRecaptcha = () => {
@@ -57,7 +60,7 @@ const Login = () => {
   const checkUserExistence = async () => {
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/auth/check-user",
+        `${import.meta.env.VITE_API_HOST}/auth/check-user`,
         { phone }
       );
       return res.data.exists;
@@ -93,7 +96,7 @@ const Login = () => {
         console.error("Recaptcha or OTP error:", error);
       }
     } else {
-      setShowRegistration(true); // Switch to registration form if user doesn't exist
+      setShowRegistration(true); 
     }
   };
 
@@ -101,7 +104,7 @@ const Login = () => {
     if (loading) return;
     setLoading(true);
     try {
-      await axios.post("http://localhost:5000/api/auth/register", {
+      await axios.post(`${import.meta.env.VITE_API_HOST}/auth/register`, {
         ...formData,
         phone,
         age: Number(formData.age),
@@ -123,12 +126,16 @@ const Login = () => {
       setToken(idToken);
 
       const res = await axios.post(
-        "http://localhost:5000/api/auth/verify-token",
+        `${import.meta.env.VITE_API_HOST}/auth/verify-token`,
         { idToken }
       );
       if (res.data.exists) {
         toast.success("Welcome back! Redirecting...");
-        window.location.href = "/home";
+        if (res.data.role === "admin") {
+          navigate("/admin-dashboard");
+        } else {
+          navigate(`/user-dashboard/${res.data.userId}`);
+        }
       }
     } catch (error) {
       toast.error("❌ Invalid OTP");
