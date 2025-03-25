@@ -1,87 +1,133 @@
-import { useState } from "react";
-import { Upload, Trash2, FileText, Trash } from "lucide-react";
+// export default PatientListing;
+import { useEffect, useState } from "react";
+import { Upload, Trash2, Trash, Eye } from "lucide-react";
+import axios from "axios";
 
 interface Patient {
-  id: number;
+  _id: string;
   name: string;
   phone: string;
-  gender: string;
+  sex: string;
   age: number;
-  reports: File[];
+  role:{
+    name:string
+  };
+  report: string[]; // Array of file URLs
 }
 
 const PatientListing = () => {
-  // Sample patient data
-  const [patients, setPatients] = useState<Patient[]>([
-    {
-      id: 1,
-      name: "John Doe",
-      phone: "+91 9876543210",
-      gender: "Male",
-      age: 32,
-      reports: [],
-    },
-    {
-      id: 2,
-      name: "Jane Smith",
-      phone: "+91 9765432109",
-      gender: "Female",
-      age: 28,
-      reports: [],
-    },
-  ]);
+  const [patients, setPatients] = useState<Patient[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
-  // Upload files for a patient
-  const handleFileUpload = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    patientId: number
-  ) => {
-    if (e.target.files) {
-      const newFiles = Array.from(e.target.files);
-      setPatients(
-        patients.map((patient) =>
-          patient.id === patientId
-            ? { ...patient, reports: [...patient.reports, ...newFiles] }
-            : patient
-        )
-      );
+  const fetchPatients = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.get("https://scanxpert-backend.onrender.com/api/auth/list"); // adjust this route
+      setPatients(response.data.data);
+    } catch (error) {
+      console.error("Failed to fetch patients:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
-  // Delete a file from a patient's report
-  const handleDeleteFile = (patientId: number, fileIndex: number) => {
-    setPatients(
-      patients.map((patient) =>
-        patient.id === patientId
-          ? {
-              ...patient,
-              reports: patient.reports.filter(
-                (_, index) => index !== fileIndex
-              ),
-            }
-          : patient
+  useEffect(() => {
+    fetchPatients();
+  }, []);
+
+  const handleDeleteReport = (patientId: string, index: number) => {
+    const patient = patients.find((p) => p._id === patientId);
+    if (!patient) return;
+  
+    const reportToDelete = patient.report[index];
+    if (!reportToDelete) return;
+  
+    // Update frontend state first (optimistic UI)
+    setPatients((prev) =>
+      prev.map((p) =>
+        p._id === patientId
+          ? { ...p, report: p.report.filter((_, i) => i !== index) }
+          : p
       )
     );
+  
+    // Make backend API call to actually delete the report
+    axios
+      .post(`${import.meta.env.VITE_API_HOST}/auth/delete/${patientId}`, {
+        report: reportToDelete,
+      })
+      .then(() => {
+        console.log('Report deleted successfully');
+      })
+      .catch((err) => {
+        console.error('Error deleting report:', err);
+        // Optionally: rollback frontend change if API fails
+      });
+  };
+  
+  const handleUpload = (e: React.ChangeEvent<HTMLInputElement>, patientId: string) => {
+    const files = e.target.files;
+    if (!files) return;
+  
+    const formData = new FormData();
+    Array.from(files).forEach((file) => {
+      formData.append("report", file); // ✅ match the field name used in multer
+    });
+  
+    axios
+      .post(`${import.meta.env.VITE_API_HOST}/api/auth/report/${patientId}`, formData)
+      .then((_res) => {
+        fetchPatients(); // refresh list after upload
+      })
+      .catch((err) => {
+        console.error("Upload error", err);
+      });
+  };
+  
+
+  const handleDeletePatient = (patientId: string) => {
+    // Optimistically update the UI
+    setPatients((prev) => prev.filter((p) => p._id !== patientId));
+
+    axios
+  .delete(`${import.meta.env.VITE_API_HOST}/auth/user/${patientId}`)
+  .then(() => {
+    console.log('User deleted successfully');
+  })
+  .catch((err) => {
+    console.error('Error deleting user:', err);
+  });
   };
 
-  // Delete a patient from the list
-  const handleDeletePatient = (patientId: number) => {
-    setPatients(patients.filter((patient) => patient.id !== patientId));
+  
+  const handleRoleChange = async (patientId: string, newRole: string) => {
+    try {
+      await axios.patch(`${import.meta.env.VITE_API_HOST}/auth/update/${patientId}`, {
+        role: newRole,
+      });
+
+      setPatients((prev) =>
+        prev.map((p) => (p._id === patientId ? { ...p, role: { name: newRole } } : p))
+      );
+    } catch (error) {
+      console.error("Error updating role:", error);
+    }
   };
+  
 
   return (
     <section className="py-12 sm:py-16 bg-white flex justify-center items-center mb-20">
       <div className="container mx-auto px-4 sm:px-6 lg:px-12 max-w-7xl">
         {/* Heading */}
-        <div className="flex items-center justify-center gap-3 sm:gap-4 md:gap-6 mb-8">
-          <div className="h-[2px] w-12 sm:w-20 md:w-32 bg-darkGray"></div>
-          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 text-center">
+        <div className="flex items-center justify-center gap-4 mb-8">
+          <div className="h-[2px] w-20 bg-darkGray"></div>
+          <h2 className="text-3xl font-bold text-gray-900 text-center">
             Patient <span className="text-primaryBlue">Listing</span>
           </h2>
-          <div className="h-[2px] w-12 sm:w-20 md:w-32 bg-darkGray"></div>
+          <div className="h-[2px] w-20 bg-darkGray"></div>
         </div>
 
-        {/* Patient Table */}
+        {/* Table */}
         <div className="bg-white shadow-lg rounded-2xl p-6 border border-darkGray">
           <div className="overflow-x-auto">
             <table className="w-full table-auto border-collapse">
@@ -89,7 +135,7 @@ const PatientListing = () => {
                 <tr className="bg-gray-100 text-gray-700">
                   <th className="text-left px-4 py-3">Name</th>
                   <th className="text-left px-4 py-3">Phone</th>
-                  <th className="text-left px-4 py-3">Gender</th>
+                  <th className="text-left px-4 py-3">Sex</th>
                   <th className="text-left px-4 py-3">Age</th>
                   <th className="text-left px-4 py-3">Reports</th>
                   <th className="text-center px-4 py-3">Actions</th>
@@ -97,34 +143,40 @@ const PatientListing = () => {
               </thead>
               <tbody>
                 {patients.map((patient) => (
-                  <tr
-                    key={patient.id}
-                    className="border-b hover:bg-gray-50 transition"
-                  >
+                  <tr key={patient._id} className="border-b hover:bg-gray-50">
                     <td className="px-4 py-3">{patient.name}</td>
                     <td className="px-4 py-3">{patient.phone}</td>
-                    <td className="px-4 py-3">{patient.gender}</td>
+                    <td className="px-4 py-3 capitalize">{patient.sex}</td>
                     <td className="px-4 py-3">{patient.age}</td>
-
-                    {/* Uploaded Reports */}
                     <td className="px-4 py-3">
-                      {patient.reports.length === 0 ? (
+                    <select
+                        value={patient.role.name}
+                        onChange={(e) => handleRoleChange(patient._id, e.target.value)}
+                        className="border rounded-lg p-1"
+                      >
+                        <option value="user">User</option>
+                        <option value="admin">Admin</option>
+                      </select>
+                      {patient.report.length === 0 ? (
                         <span className="text-gray-500">No Reports</span>
                       ) : (
                         <ul className="space-y-1">
-                          {patient.reports.map((file, index) => (
+                          {patient.report.map((url, index) => (
                             <li
                               key={index}
                               className="flex items-center justify-between text-sm"
                             >
-                              <span className="flex items-center gap-2 text-gray-700">
-                                <FileText className="w-4 h-4 text-primaryBlue" />
-                                {file.name}
-                              </span>
+                              <a
+                                href={url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex items-center gap-2 text-blue-600 hover:underline"
+                              >
+                                <Eye className="w-4 h-4" />
+                                View Report {index + 1}
+                              </a>
                               <button
-                                onClick={() =>
-                                  handleDeleteFile(patient.id, index)
-                                }
+                                onClick={() => handleDeleteReport(patient._id, index)}
                                 className="text-red-500 hover:text-red-700"
                               >
                                 <Trash2 className="w-4 h-4" />
@@ -135,28 +187,28 @@ const PatientListing = () => {
                       )}
                     </td>
 
-                    {/* Actions */}
                     <td className="px-4 py-3 text-center">
                       <div className="flex justify-center items-center gap-2">
-                        {/* Upload Button */}
+                        {/* Upload */}
                         <label
-                          htmlFor={`file-upload-${patient.id}`}
+                          htmlFor={`file-upload-${patient._id}`}
                           className="bg-primaryBlue text-white px-4 py-2 rounded-lg cursor-pointer hover:bg-secondaryBlue transition flex items-center gap-2"
                         >
                           <Upload className="w-4 h-4" />
-                          Upload New Report
+                          Upload
                         </label>
                         <input
-                          id={`file-upload-${patient.id}`}
+                          id={`file-upload-${patient._id}`}
                           type="file"
                           multiple
                           className="hidden"
-                          accept=".pdf, .jpg, .jpeg, .png"
-                          onChange={(e) => handleFileUpload(e, patient.id)}
+                          accept=".pdf,.jpg,.jpeg,.png"
+                          onChange={(e) => handleUpload(e, patient._id)}
                         />
-                        {/* Delete Patient Button */}
+
+                        {/* Delete */}
                         <button
-                          onClick={() => handleDeletePatient(patient.id)}
+                          onClick={() => handleDeletePatient(patient._id)}
                           className="bg-red-700 text-white px-4 py-2 rounded-lg hover:bg-red-800 transition flex items-center gap-2"
                         >
                           <Trash className="w-4 h-4" />
@@ -169,12 +221,16 @@ const PatientListing = () => {
               </tbody>
             </table>
 
-            {/* No Patients Message */}
-            {patients.length === 0 && (
+            {/* Loading & Empty States */}
+            {loading ? (
               <div className="text-center text-gray-500 py-6">
-                No patients available.
+                Loading patients...
               </div>
-            )}
+            ) : patients.length === 0 ? (
+              <div className="text-center text-gray-500 py-6">
+                No patients found.
+              </div>
+            ) : null}
           </div>
         </div>
       </div>

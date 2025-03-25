@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Upload, X } from "lucide-react";
+import axios from "axios";
 
 const OnBoardPatient = () => {
   const [formData, setFormData] = useState({
@@ -7,11 +8,10 @@ const OnBoardPatient = () => {
     phone: "",
     gender: "",
     age: "",
-    role: "patient",
+    role: "Patient",
     reports: [] as File[],
   });
 
-  // Handle input change
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
@@ -19,7 +19,6 @@ const OnBoardPatient = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  // Handle multiple file uploads
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       setFormData({
@@ -29,7 +28,6 @@ const OnBoardPatient = () => {
     }
   };
 
-  // Remove file
   const removeFile = (index: number) => {
     setFormData({
       ...formData,
@@ -37,10 +35,52 @@ const OnBoardPatient = () => {
     });
   };
 
-  // Handle form submission
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form Data Submitted:", formData);
+
+    if (formData.reports.length === 0) {
+      alert("Please upload at least one report.");
+      return;
+    }
+
+    const form = new FormData();
+    form.append("name", formData.name);
+    form.append("phone", formData.phone);
+    form.append("gender", formData.gender);
+    form.append("age", formData.age);
+    form.append("role", formData.role);
+
+    formData.reports.forEach((file) => {
+      form.append("reports", file);
+    });
+
+    try {
+      const res = await axios.post(`${import.meta.env.VITE_API_HOST}/auth/register`, form, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+
+      const data = res.data;
+
+      if (res.status === 200) {
+        alert("Patient onboarded successfully!");
+        console.log("Response:", data);
+        setFormData({
+          name: "",
+          phone: "",
+          gender: "",
+          age: "",
+          role: "patient",
+          reports: [],
+        });
+      } else {
+        alert("Failed to onboard: " + (data?.message || "Unknown error"));
+      }
+    } catch (error) {
+      console.error("API Error:", error);
+      alert("Something went wrong while onboarding the patient.");
+    }
   };
 
   return (
@@ -130,8 +170,8 @@ const OnBoardPatient = () => {
             </div>
           </div>
 
-          {/* Role */}
-          <div>
+            {/* Role */}
+            <div>
             <label className="text-gray-700 font-semibold block mb-2">
               Role <span className="text-red-500">*</span>
             </label>
@@ -147,6 +187,8 @@ const OnBoardPatient = () => {
             </select>
           </div>
 
+
+
           {/* Upload Reports */}
           <div>
             <label className="text-gray-700 font-semibold block mb-2">
@@ -161,7 +203,7 @@ const OnBoardPatient = () => {
                 onChange={handleFileChange}
                 className="hidden"
                 id="fileUpload"
-              /> 
+              />
               <label
                 htmlFor="fileUpload"
                 className="bg-primaryBlue text-white px-4 py-2 rounded-lg cursor-pointer hover:bg-darkOrange transition"
