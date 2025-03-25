@@ -9,6 +9,9 @@ interface Patient {
   phone: string;
   sex: string;
   age: number;
+  role:{
+    name:string
+  };
   report: string[]; // Array of file URLs
 }
 
@@ -95,6 +98,21 @@ const PatientListing = () => {
     console.error('Error deleting user:', err);
   });
   };
+
+  
+  const handleRoleChange = async (patientId: string, newRole: string) => {
+    try {
+      await axios.patch(`${import.meta.env.VITE_API_HOST}/auth/update/${patientId}`, {
+        role: newRole,
+      });
+
+      setPatients((prev) =>
+        prev.map((p) => (p._id === patientId ? { ...p, role: { name: newRole } } : p))
+      );
+    } catch (error) {
+      console.error("Error updating role:", error);
+    }
+  };
   
 
   return (
@@ -131,6 +149,14 @@ const PatientListing = () => {
                     <td className="px-4 py-3 capitalize">{patient.sex}</td>
                     <td className="px-4 py-3">{patient.age}</td>
                     <td className="px-4 py-3">
+                    <select
+                        value={patient.role.name}
+                        onChange={(e) => handleRoleChange(patient._id, e.target.value)}
+                        className="border rounded-lg p-1"
+                      >
+                        <option value="user">User</option>
+                        <option value="admin">Admin</option>
+                      </select>
                       {patient.report.length === 0 ? (
                         <span className="text-gray-500">No Reports</span>
                       ) : (
