@@ -9,20 +9,30 @@ interface Patient {
   phone: string;
   sex: string;
   age: number;
-  role:{
-    name:string
+  role: {
+    _id:string;
+    name: string
   };
   report: string[]; // Array of file URLs
+}
+
+interface Role {
+  _id: string;
+  name: string;
 }
 
 const PatientListing = () => {
   const [patients, setPatients] = useState<Patient[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
+
+  const [roles, setRoles] = useState<Role[]>([]);
+
   const fetchPatients = async () => {
+    console.log(`${import.meta.env.VITE_API_HOST}`)
     setLoading(true);
     try {
-      const response = await axios.get("https://scanxpert-backend.onrender.com/api/auth/list"); // adjust this route
+      const response = await axios.get(`${import.meta.env.VITE_API_HOST}/api/auth/list`); // adjust this route
       setPatients(response.data.data);
     } catch (error) {
       console.error("Failed to fetch patients:", error);
@@ -35,13 +45,26 @@ const PatientListing = () => {
     fetchPatients();
   }, []);
 
+  useEffect(() => {
+    const fetchRoles = async () => {
+      try {
+        const response = await axios.get(`${import.meta.env.VITE_API_HOST}/api/role/list`);
+        setRoles(response.data);
+      } catch (error) {
+        console.error("Error fetching roles:", error);
+      }
+    };
+
+    fetchRoles();
+  }, []);
+
   const handleDeleteReport = (patientId: string, index: number) => {
     const patient = patients.find((p) => p._id === patientId);
     if (!patient) return;
-  
+
     const reportToDelete = patient.report[index];
     if (!reportToDelete) return;
-  
+
     // Update frontend state first (optimistic UI)
     setPatients((prev) =>
       prev.map((p) =>
@@ -50,10 +73,10 @@ const PatientListing = () => {
           : p
       )
     );
-  
+
     // Make backend API call to actually delete the report
     axios
-      .post(`${import.meta.env.VITE_API_HOST}/auth/delete/${patientId}`, {
+      .post(`${import.meta.env.VITE_API_HOST}/api/auth/delete/${patientId}`, {
         report: reportToDelete,
       })
       .then(() => {
@@ -64,16 +87,16 @@ const PatientListing = () => {
         // Optionally: rollback frontend change if API fails
       });
   };
-  
+
   const handleUpload = (e: React.ChangeEvent<HTMLInputElement>, patientId: string) => {
     const files = e.target.files;
     if (!files) return;
-  
+
     const formData = new FormData();
     Array.from(files).forEach((file) => {
       formData.append("report", file); // ✅ match the field name used in multer
     });
-  
+
     axios
       .post(`${import.meta.env.VITE_API_HOST}/api/auth/report/${patientId}`, formData)
       .then((_res) => {
@@ -83,37 +106,37 @@ const PatientListing = () => {
         console.error("Upload error", err);
       });
   };
-  
+
 
   const handleDeletePatient = (patientId: string) => {
     // Optimistically update the UI
     setPatients((prev) => prev.filter((p) => p._id !== patientId));
 
     axios
-  .delete(`${import.meta.env.VITE_API_HOST}/auth/user/${patientId}`)
-  .then(() => {
-    console.log('User deleted successfully');
-  })
-  .catch((err) => {
-    console.error('Error deleting user:', err);
-  });
+      .delete(`${import.meta.env.VITE_API_HOST}/api/auth/user/${patientId}`)
+      .then(() => {
+        console.log('User deleted successfully');
+      })
+      .catch((err) => {
+        console.error('Error deleting user:', err);
+      });
   };
 
-  
-  const handleRoleChange = async (patientId: string, newRole: string) => {
+  const handleRoleChange = async (patientId: string, roleId: string) => {
     try {
-      await axios.patch(`${import.meta.env.VITE_API_HOST}/auth/update/${patientId}`, {
-        role: newRole,
+      await axios.patch(`${import.meta.env.VITE_API_HOST}/api/role/update/${patientId}`, {
+        role: roleId, // Send role ID instead of role name
       });
 
       setPatients((prev) =>
-        prev.map((p) => (p._id === patientId ? { ...p, role: { name: newRole } } : p))
+        prev.map((p) => (p._id === patientId ? { ...p, role: { _id: roleId, name: roles.find(role => role._id === roleId)?.name || p.role.name } } : p))
       );
     } catch (error) {
       console.error("Error updating role:", error);
     }
   };
-  
+
+
 
   return (
     <section className="py-12 sm:py-16 bg-white flex justify-center items-center mb-20">
@@ -149,13 +172,12 @@ const PatientListing = () => {
                     <td className="px-4 py-3 capitalize">{patient.sex}</td>
                     <td className="px-4 py-3">{patient.age}</td>
                     <td className="px-4 py-3">
-                    <select
-                        value={patient.role.name}
-                        onChange={(e) => handleRoleChange(patient._id, e.target.value)}
-                        className="border rounded-lg p-1"
-                      >
-                        <option value="user">User</option>
-                        <option value="admin">Admin</option>
+                      <select onChange={(e) => handleRoleChange(patient._id, e.target.value)}>
+                        {roles.map((role) => (
+                          <option key={role._id} value={role._id}>
+                            {role.name}
+                          </option>
+                        ))}
                       </select>
                       {patient.report.length === 0 ? (
                         <span className="text-gray-500">No Reports</span>

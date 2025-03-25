@@ -21,7 +21,7 @@ const UserDashboard = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/auth/user/${userId}`);
+        const response = await axios.get(`${import.meta.env.VITE_API_HOST}/api/auth/user/${userId}`);
         setUser(response.data);
       } catch (err) {
         setError("Failed to fetch user data.");
