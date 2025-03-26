@@ -48,7 +48,7 @@ const PatientListing = () => {
   useEffect(() => {
     const fetchRoles = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_API_HOST}/api/role/list`);
+        const response = await axios.get(`${import.meta.env.VITE_API_HOST}/api/role/all`);
         setRoles(response.data);
       } catch (error) {
         console.error("Error fetching roles:", error);
@@ -124,7 +124,7 @@ const PatientListing = () => {
 
   const handleRoleChange = async (patientId: string, roleId: string) => {
     try {
-      await axios.patch(`${import.meta.env.VITE_API_HOST}/api/role/update/${patientId}`, {
+      await axios.patch(`${import.meta.env.VITE_API_HOST}/api/auth/user/${patientId}`, {
         role: roleId, // Send role ID instead of role name
       });
 
