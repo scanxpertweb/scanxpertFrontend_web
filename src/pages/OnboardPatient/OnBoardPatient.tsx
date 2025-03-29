@@ -9,7 +9,7 @@ const OnBoardPatient = () => {
     sex: "",
     age: "",
     role: "patient",
-    reports: [] as File[],
+    report: [] as File[],
   });
 
   const handleChange = (
@@ -23,7 +23,7 @@ const OnBoardPatient = () => {
     if (e.target.files) {
       setFormData({
         ...formData,
-        reports: [...formData.reports, ...Array.from(e.target.files)],
+        report: [...formData.report, ...Array.from(e.target.files)],
       });
     }
   };
@@ -31,14 +31,14 @@ const OnBoardPatient = () => {
   const removeFile = (index: number) => {
     setFormData({
       ...formData,
-      reports: formData.reports.filter((_, i) => i !== index),
+      report: formData.report.filter((_, i) => i !== index),
     });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (formData.reports.length === 0) {
+    if (formData.report.length === 0) {
       alert("Please upload at least one report.");
       return;
     }
@@ -50,12 +50,12 @@ const OnBoardPatient = () => {
     form.append("age", formData.age);
     form.append("role", formData.role);
 
-    formData.reports.forEach((file) => {
-      form.append("reports", file);
+    formData.report.forEach((file) => {
+      form.append("report", file);
     });
 
     try {
-      const res = await axios.post(`${import.meta.env.VITE_API_HOST}/api/auth/register`, form, {
+      const res = await axios.post(`http://localhost:5000/api/auth/register`, form, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -63,7 +63,7 @@ const OnBoardPatient = () => {
 
       const data = res.data;
 
-      if (res.status === 200) {
+      if (res.status === 201) {
         alert("Patient onboarded successfully!");
         console.log("Response:", data);
         setFormData({
@@ -72,7 +72,7 @@ const OnBoardPatient = () => {
           sex: "",
           age: "",
           role: "patient",
-          reports: [],
+          report: [],
         });
       } else {
         alert("Failed to onboard: " + (data?.message || "Unknown error"));
@@ -189,15 +189,15 @@ const OnBoardPatient = () => {
 
 
 
-          {/* Upload Reports */}
+          {/* Upload report */}
           <div>
             <label className="text-gray-700 font-semibold block mb-2">
-              Upload Reports (PDF or Image)
+              Upload report (PDF or Image)
             </label>
             <div className="flex items-center gap-4 border border-gray-300 px-4 py-3 rounded-lg bg-gray-50">
               <input
                 type="file"
-                name="reports"
+                name="report"
                 accept=".pdf, .jpg, .jpeg, .png"
                 multiple
                 onChange={handleFileChange}
@@ -214,13 +214,13 @@ const OnBoardPatient = () => {
             </div>
 
             {/* File Preview */}
-            {formData.reports.length > 0 && (
+            {formData.report.length > 0 && (
               <div className="mt-4 space-y-2">
                 <h4 className="text-sm font-semibold text-gray-700 mb-2">
                   Uploaded Files:
                 </h4>
                 <ul className="border border-gray-300 rounded-lg p-3 space-y-2">
-                  {formData.reports.map((file, index) => (
+                  {formData.report.map((file, index) => (
                     <li
                       key={index}
                       className="flex justify-between items-center text-sm text-gray-700"
