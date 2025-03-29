@@ -6,7 +6,7 @@ const OnBoardPatient = () => {
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
-    gender: "",
+    sex: "",
     age: "",
     role: "patient",
     reports: [] as File[],
@@ -46,7 +46,7 @@ const OnBoardPatient = () => {
     const form = new FormData();
     form.append("name", formData.name);
     form.append("phone", formData.phone);
-    form.append("gender", formData.gender);
+    form.append("gender", formData.sex);
     form.append("age", formData.age);
     form.append("role", formData.role);
 
@@ -69,7 +69,7 @@ const OnBoardPatient = () => {
         setFormData({
           name: "",
           phone: "",
-          gender: "",
+          sex: "",
           age: "",
           role: "patient",
           reports: [],
@@ -141,7 +141,7 @@ const OnBoardPatient = () => {
               </label>
               <select
                 name="gender"
-                value={formData.gender}
+                value={formData.sex}
                 onChange={handleChange}
                 className="w-full border border-gray-300 px-4 py-3 rounded-lg outline-none focus:ring-2 focus:ring-primaryBlue"
                 required
