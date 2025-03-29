@@ -29,7 +29,6 @@ const PatientListing = () => {
   const [roles, setRoles] = useState<Role[]>([]);
 
   const fetchPatients = async () => {
-    console.log(`${import.meta.env.VITE_API_HOST}`)
     setLoading(true);
     try {
       const response = await axios.get(`${import.meta.env.VITE_API_HOST}/api/auth/list`);
