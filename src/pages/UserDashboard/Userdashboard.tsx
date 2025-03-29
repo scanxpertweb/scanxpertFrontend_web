@@ -16,22 +16,29 @@ const UserDashboard = () => {
   const [user, setUser] = useState<UserData | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const { id: userId } = useParams();
+  const { id } = useParams(); // Change 'userId' to 'id'
 
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const response = await axios.get(`${import.meta.env.VITE_API_HOST}/api/auth/user/${userId}`);
-        setUser(response.data);
-      } catch (err) {
-        setError("Failed to fetch user data.");
-      } finally {
-        setLoading(false);
-      }
-    };
+useEffect(() => {
+  const fetchUserData = async () => {
+    if (!id) {
+      setError("User ID is missing in the URL.");
+      setLoading(false);
+      return;
+    }
+    
+    try {
+      const response = await axios.get(`${import.meta.env.VITE_API_HOST}/api/auth/user/${id}`);
+      setUser(response.data);
+    } catch (err) {
+      setError("Failed to fetch user data.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    fetchUserData();
-  }, []);
+  fetchUserData();
+}, [id]); 
+
 
   // Download report
   const handleDownload = (fileUrl: string) => {

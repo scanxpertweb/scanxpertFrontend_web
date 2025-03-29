@@ -48,7 +48,7 @@ const AppRouter = () => {
             <Route path="/admin-dashboard" element={<AdminDashboard />} />
             <Route path="/onboard-patient" element={<OnBoardPatient />} />
             <Route path="/patient-list" element={<PatientListing />} />
-            <Route path="/user-dashboard/:userId" element={<UserDashboard />} />
+            <Route path="/user-dashboard/:id" element={<UserDashboard />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
