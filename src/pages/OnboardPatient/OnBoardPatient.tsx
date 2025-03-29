@@ -8,7 +8,7 @@ const OnBoardPatient = () => {
     phone: "",
     gender: "",
     age: "",
-    role: "Patient",
+    role: "patient",
     reports: [] as File[],
   });
 
