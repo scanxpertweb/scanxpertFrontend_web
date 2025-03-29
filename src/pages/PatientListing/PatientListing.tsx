@@ -32,7 +32,7 @@ const PatientListing = () => {
     console.log(`${import.meta.env.VITE_API_HOST}`)
     setLoading(true);
     try {
-      const response = await axios.get(`${import.meta.env.VITE_API_HOST}/api/auth/list`); // adjust this route
+      const response = await axios.get(`${import.meta.env.VITE_API_HOST}/api/auth/list`);
       setPatients(response.data.data);
     } catch (error) {
       console.error("Failed to fetch patients:", error);
