@@ -130,7 +130,10 @@ const Login = () => {
         { idToken }
       );
       if (res.data.exists) {
+
+        localStorage.setItem("token", res.data.token);
         toast.success("Welcome back! Redirecting...");
+
   
         if (String(res.data.role) === "67e434059b46fdbdc1c2cf42") {
           navigate("/admin-dashboard");

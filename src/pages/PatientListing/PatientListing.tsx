@@ -10,7 +10,7 @@ interface Patient {
   sex: string;
   age: number;
   role: {
-    _id:string;
+    _id: string;
     name: string
   };
   report: string[]; // Array of file URLs
@@ -164,25 +164,28 @@ const PatientListing = () => {
                 </tr>
               </thead>
               <tbody>
-                {patients.map((patient) => (
+                {patients?.map((patient) => (
                   <tr key={patient._id} className="border-b hover:bg-gray-50">
                     <td className="px-4 py-3">{patient.name}</td>
                     <td className="px-4 py-3">{patient.phone}</td>
                     <td className="px-4 py-3 capitalize">{patient.sex}</td>
                     <td className="px-4 py-3">{patient.age}</td>
                     <td className="px-4 py-3">
-                      <select onChange={(e) => handleRoleChange(patient._id, e.target.value)}>
+                      <select
+                        value={patient?.role._id}
+                        onChange={(e) => handleRoleChange(patient._id, e.target.value)}
+                      >
                         {roles.map((role) => (
                           <option key={role._id} value={role._id}>
                             {role.name}
                           </option>
                         ))}
                       </select>
-                      {patient.report.length === 0 ? (
+                      {patient?.report?.length === 0 ? (
                         <span className="text-gray-500">No Reports</span>
                       ) : (
                         <ul className="space-y-1">
-                          {patient.report.map((url, index) => (
+                          {patient?.report?.map((url, index) => (
                             <li
                               key={index}
                               className="flex items-center justify-between text-sm"
@@ -247,7 +250,7 @@ const PatientListing = () => {
               <div className="text-center text-gray-500 py-6">
                 Loading patients...
               </div>
-            ) : patients.length === 0 ? (
+            ) : patients?.length === 0 ? (
               <div className="text-center text-gray-500 py-6">
                 No patients found.
               </div>
