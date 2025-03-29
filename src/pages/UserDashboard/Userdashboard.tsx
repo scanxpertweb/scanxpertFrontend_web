@@ -99,7 +99,7 @@ useEffect(() => {
               <DownloadCloud className="w-6 h-6 text-green-500" />
               Download Reports
             </h3>
-            {user?.reports.length === 0 ? (
+            {user?.reports?.length === 0 ? (
               <p className="text-sm text-gray-500">No reports available.</p>
             ) : (
               <ul className="space-y-3">
