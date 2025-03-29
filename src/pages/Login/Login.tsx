@@ -112,7 +112,7 @@ const Login = () => {
       setShowRegistration(false);
       toast.success('Registration successful. Please click "Send OTP" again.');
     } catch (err) {
-      console.error("Registration failed:", err);
+      console.error("Registration failed:", (err as Error).message);
       toast.error("Registration failed");
     } finally {
       setLoading(false);
