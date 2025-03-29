@@ -7,7 +7,7 @@ import { useParams } from "react-router-dom";
 interface UserData {
   name: string;
   phone: string;
-  gender: string;
+  sex: string;
   age: number;
   reports: string[]; // Assume backend provides report URLs
 }
@@ -84,7 +84,7 @@ useEffect(() => {
               </p>
               <p className="flex items-center gap-2">
                 <VenusAndMars className="w-5 h-5 text-primaryBlue" />
-                <span className="font-semibold">Gender:</span> {user?.gender}
+                <span className="font-semibold">Gender:</span> {user?.sex}
               </p>
               <p className="flex items-center gap-2">
                 <Calendar className="w-5 h-5 text-primaryBlue" />
