@@ -131,10 +131,10 @@ const Login = () => {
       );
       if (res.data.exists) {
         toast.success("Welcome back! Redirecting...");
-        if (res.data.role === "admin") {
+        if (res.data.role.name === "admin") {
           navigate("/admin-dashboard");
         } else {
-          navigate(`/user-dashboard/${res.data._id}`);
+          navigate(`/user-dashboard/${res.data.userId}`);
         }
       }
     } catch (error) {
