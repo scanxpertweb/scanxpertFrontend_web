@@ -103,7 +103,7 @@ useEffect(() => {
               <p className="text-sm text-gray-500">No reports available.</p>
             ) : (
               <ul className="space-y-3">
-                {user?.reports.map((fileUrl, index) => (
+                {user?.reports?.map((fileUrl, index) => (
                   <li key={index} className="flex items-center justify-between text-sm sm:text-base">
                     <span className="flex items-center gap-2 text-gray-700">
                       <FileText className="w-5 h-5 text-primaryBlue" />
