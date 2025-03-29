@@ -18,6 +18,8 @@ const UserDashboard = () => {
   const [error, setError] = useState<string | null>(null);
   const { id } = useParams(); // Change 'userId' to 'id'
 
+  console.log(`User ID from URL: ${id}`); // Debugging line
+
 useEffect(() => {
   const fetchUserData = async () => {
     if (!id) {

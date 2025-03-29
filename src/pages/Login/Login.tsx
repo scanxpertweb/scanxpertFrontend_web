@@ -134,7 +134,7 @@ const Login = () => {
         if (res.data.role === "admin") {
           navigate("/admin-dashboard");
         } else {
-          navigate(`/user-dashboard/${res.data.userId}`);
+          navigate(`/user-dashboard/${res.data._id}`);
         }
       }
     } catch (error) {
