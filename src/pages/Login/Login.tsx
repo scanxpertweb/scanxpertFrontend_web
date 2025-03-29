@@ -131,11 +131,16 @@ const Login = () => {
       );
       if (res.data.exists) {
         toast.success("Welcome back! Redirecting...");
-        if (res.data.role.name === "admin") {
+  
+        if (String(res.data.role) === "67e434059b46fdbdc1c2cf42") {
           navigate("/admin-dashboard");
-        } else {
+        } else if (res.data.userId) {
+          localStorage.setItem("userId", res.data.userId);
           navigate(`/user-dashboard/${res.data.userId}`);
+        } else {
+          toast.error("User ID not found!");
         }
+      
       }
     } catch (error) {
       toast.error("❌ Invalid OTP");
