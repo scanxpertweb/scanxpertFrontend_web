@@ -1,7 +1,7 @@
 // export default UserDashboard;
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { User, Phone, VenusAndMars, Calendar, DownloadCloud, FileText } from "lucide-react";
+import { User, Phone, VenusAndMars, Calendar, DownloadCloud } from "lucide-react";
 import { useParams } from "react-router-dom";
 
 interface UserData {
@@ -9,7 +9,7 @@ interface UserData {
   phone: string;
   sex: string;
   age: number;
-  reports: string[]; // Assume backend provides report URLs
+  report: string[]; // Assume backend provides report URLs
 }
 
 const UserDashboard = () => {
@@ -43,12 +43,24 @@ useEffect(() => {
 
 
   // Download report
-  const handleDownload = (fileUrl: string) => {
-    const link = document.createElement("a");
-    link.href = fileUrl;
-    link.download = fileUrl.split("/").pop() || "report";
-    link.click();
+  const handleDownload = async (fileUrl: string) => {
+    try {
+      const response = await axios.get(fileUrl, {
+        responseType: "blob", // Ensures the response is treated as a file
+      });
+  
+      const blob = new Blob([response.data], { type: response.headers["content-type"] });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.setAttribute("download", fileUrl.split("/").pop() || "report.pdf");
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch (error) {
+      console.error("Download failed:", error);
+    }
   };
+  
 
   if (loading) return <p className="text-center text-gray-600">Loading...</p>;
   if (error) return <p className="text-center text-red-500">{error}</p>;
@@ -99,22 +111,19 @@ useEffect(() => {
               <DownloadCloud className="w-6 h-6 text-green-500" />
               Download Reports
             </h3>
-            {user?.reports?.length === 0 ? (
+            {user?.report?.length === 0 ? (
               <p className="text-sm text-gray-500">No reports available.</p>
             ) : (
               <ul className="space-y-3">
-                {user?.reports?.map((fileUrl, index) => (
+                {user?.report?.map((fileUrl, index) => (
                   <li key={index} className="flex items-center justify-between text-sm sm:text-base">
-                    <span className="flex items-center gap-2 text-gray-700">
-                      <FileText className="w-5 h-5 text-primaryBlue" />
-                      {fileUrl.split("/").pop()}
-                    </span>
+                
                     <button
                       onClick={() => handleDownload(fileUrl)}
                       className="text-primaryBlue hover:text-darkOrange flex items-center gap-1"
                     >
                       <DownloadCloud className="w-4 h-4" />
-                      Download
+                      Download Report
                     </button>
                   </li>
                 ))}
