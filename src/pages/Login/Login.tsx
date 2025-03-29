@@ -60,7 +60,7 @@ const Login = () => {
   const checkUserExistence = async () => {
     try {
       const res = await axios.post(
-        `${import.meta.env.VITE_API_HOST}/auth/check-user`,
+        `${import.meta.env.VITE_API_HOST}/api/auth/check-user`,
         { phone }
       );
       return res.data.exists;
@@ -104,7 +104,7 @@ const Login = () => {
     if (loading) return;
     setLoading(true);
     try {
-      await axios.post(`${import.meta.env.VITE_API_HOST}/auth/register`, {
+      await axios.post(`${import.meta.env.VITE_API_HOST}/api/auth/register`, {
         ...formData,
         phone,
         age: Number(formData.age),
@@ -126,7 +126,7 @@ const Login = () => {
       setToken(idToken);
 
       const res = await axios.post(
-        `${import.meta.env.VITE_API_HOST}/auth/verify-token`,
+        `${import.meta.env.VITE_API_HOST}/api/auth/verify-token`,
         { idToken }
       );
       if (res.data.exists) {
