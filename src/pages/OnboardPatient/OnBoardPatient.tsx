@@ -46,7 +46,7 @@ const OnBoardPatient = () => {
     const form = new FormData();
     form.append("name", formData.name);
     form.append("phone", formData.phone);
-    form.append("gender", formData.sex);
+    form.append("sex", formData.sex);
     form.append("age", formData.age);
     form.append("role", formData.role);
 
@@ -140,7 +140,7 @@ const OnBoardPatient = () => {
                 Gender <span className="text-red-500">*</span>
               </label>
               <select
-                name="gender"
+                name="sex"
                 value={formData.sex}
                 onChange={handleChange}
                 className="w-full border border-gray-300 px-4 py-3 rounded-lg outline-none focus:ring-2 focus:ring-primaryBlue"
