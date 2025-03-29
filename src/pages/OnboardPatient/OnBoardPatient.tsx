@@ -55,7 +55,7 @@ const OnBoardPatient = () => {
     });
 
     try {
-      const res = await axios.post(`${import.meta.env.VITE_API_HOST}/auth/register`, form, {
+      const res = await axios.post(`${import.meta.env.VITE_API_HOST}/api/auth/register`, form, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
