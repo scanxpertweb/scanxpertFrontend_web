@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import { auth } from "./firebase";
 import axios from "axios";
@@ -25,6 +25,33 @@ const Login = () => {
 
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    // Check for existing token on component mount
+    const token = localStorage.getItem("token");
+    const tokenExpiry = localStorage.getItem("tokenExpiry");
+    
+    if (token && tokenExpiry) {
+      // Check if token is still valid (within 24 hours)
+      if (new Date().getTime() < parseInt(tokenExpiry)) {
+        // Token is valid, check role and redirect
+        const role = localStorage.getItem("role");
+        const userId = localStorage.getItem("userId");
+        
+        if (role === "67e434059b46fdbdc1c2cf42") {
+          navigate("/admin-dashboard");
+        } else if (userId) {
+          navigate(`/user-dashboard/${userId}`);
+        }
+      } else {
+        // Token expired, clear storage
+        localStorage.removeItem("token");
+        localStorage.removeItem("tokenExpiry");
+        localStorage.removeItem("role");
+        localStorage.removeItem("userId");
+      }
+    }
+  }, [navigate]);
 
   const setupRecaptcha = () => {
     return new Promise<void>((resolve, reject) => {
@@ -130,12 +157,15 @@ const Login = () => {
         { idToken }
       );
       if (res.data.exists) {
-
+        // Store token with 24 hour expiry
+        const expiryTime = new Date().getTime() + (24 * 60 * 60 * 1000); // 24 hours from now
         localStorage.setItem("token", res.data.token);
+        localStorage.setItem("tokenExpiry", expiryTime.toString());
+        
         toast.success("Welcome back! Redirecting...");
 
-  
         if (String(res.data.role) === "67e434059b46fdbdc1c2cf42") {
+          localStorage.setItem("role", res.data.role);
           navigate("/admin-dashboard");
         } else if (res.data.userId) {
           localStorage.setItem("userId", res.data.userId);
@@ -143,7 +173,6 @@ const Login = () => {
         } else {
           toast.error("User ID not found!");
         }
-      
       }
     } catch (error) {
       toast.error("❌ Invalid OTP");

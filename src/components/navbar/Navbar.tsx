@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -14,6 +14,19 @@ import { motion } from "framer-motion"; // Import Framer Motion
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userName, setUserName] = useState("");
+
+  useEffect(() => {
+    // Check authentication status
+    const token = localStorage.getItem("token");
+    const name = localStorage.getItem("userName"); // You'll need to store this during login
+
+    if (token && name) {
+      setIsLoggedIn(true);
+      setUserName(name);
+    }
+  }, []);
 
   return (
     <>
@@ -59,10 +72,29 @@ const Navbar = () => {
               </NavigationMenuList>
             </NavigationMenu>
 
-            {/* Download Reports Button (Always Visible) */}
-            <Button className="bg-[#0158a9] text-white px-4 py-2 rounded-lg hover:bg-[#014b8f] hidden md:inline-block">
-              <Link to="/login">Download Reports</Link>
-            </Button>
+            {/* Replace Download Reports Button with conditional rendering */}
+            {isLoggedIn ? (
+              <div className="hidden md:flex items-center gap-2">
+                <span className="text-gray-700 font-medium">
+                  Welcome, {userName}
+                </span>
+                <Button
+                  variant="outline"
+                  className="text-gray-700"
+                  onClick={() => {
+                    // Clear localStorage and refresh
+                    localStorage.clear();
+                    window.location.reload();
+                  }}
+                >
+                  Logout
+                </Button>
+              </div>
+            ) : (
+              <Button className="bg-[#0158a9] text-white px-4 py-2 rounded-lg hover:bg-[#014b8f] hidden md:inline-block">
+                <Link to="/login">Download Reports</Link>
+              </Button>
+            )}
 
             {/* Mobile Hamburger Menu Button */}
             <button onClick={() => setIsOpen(!isOpen)} className="md:hidden">
@@ -82,21 +114,41 @@ const Navbar = () => {
           }`}
         >
           <ul className="flex flex-col space-y-4">
-            {["Home", "About Us", "Our Services", "Contact Us"].map((item, index) => (
-              <li key={index}>
-                <Link
-                  to={`/${item.toLowerCase().replace(/\s+/g, "")}`}
-                  className="block text-gray-700 hover:text-blue-900 font-montserrat font-bold"
-                  onClick={() => setIsOpen(false)}
-                >
-                  {item}
-                </Link>
-              </li>
-            ))}
+            {["Home", "About Us", "Our Services", "Contact Us"].map(
+              (item, index) => (
+                <li key={index}>
+                  <Link
+                    to={`/${item.toLowerCase().replace(/\s+/g, "")}`}
+                    className="block text-gray-700 hover:text-blue-900 font-montserrat font-bold"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {item}
+                  </Link>
+                </li>
+              )
+            )}
             <li>
-              <Button className="bg-[#0158a9] text-white px-4 py-2 rounded-lg hover:bg-[#014b8f] w-full">
-                Download Reports
-              </Button>
+              {isLoggedIn ? (
+                <div className="flex flex-col space-y-2">
+                  <span className="text-gray-700 font-medium">
+                    Welcome, {userName}
+                  </span>
+                  <Button
+                    variant="outline"
+                    className="w-full"
+                    onClick={() => {
+                      localStorage.clear();
+                      window.location.reload();
+                    }}
+                  >
+                    Logout
+                  </Button>
+                </div>
+              ) : (
+                <Button className="bg-[#0158a9] text-white px-4 py-2 rounded-lg hover:bg-[#014b8f] w-full">
+                  <Link to="/login">Download Reports</Link>
+                </Button>
+              )}
             </li>
           </ul>
         </motion.div>

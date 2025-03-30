@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { Upload, X } from "lucide-react";
+import { ArrowLeft, Upload, X } from "lucide-react";
 import axios from "axios";
-
+import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 const OnBoardPatient = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -11,6 +12,8 @@ const OnBoardPatient = () => {
     role: "patient",
     report: [] as File[],
   });
+
+  const navigate = useNavigate();
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -86,6 +89,16 @@ const OnBoardPatient = () => {
   return (
     <section className="py-12 sm:py-16 bg-white flex justify-center items-center">
       <div className="container mx-auto px-4 sm:px-6 lg:px-12 max-w-4xl">
+         {/* Back Button */}
+         <div className="hidden md:flex justify-start mb-8">
+          <Button
+            onClick={() => navigate('/admin-dashboard')}
+            className="flex items-center gap-2 bg-primaryBlue text-white"
+          >
+            <ArrowLeft className="w-4 h-4"/>
+            Back
+          </Button>
+        </div>
         {/* Heading */}
         <div className="flex items-center justify-center gap-3 sm:gap-4 md:gap-6 mb-8">
           <div className="h-[2px] w-12 sm:w-20 md:w-32 bg-darkGray"></div>

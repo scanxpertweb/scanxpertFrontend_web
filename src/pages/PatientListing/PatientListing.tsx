@@ -1,8 +1,9 @@
 // export default PatientListing;
 import { useEffect, useState } from "react";
-import { Upload, Trash2, Trash, Eye } from "lucide-react";
+import { Upload, Trash2, Trash, Eye, ArrowLeft } from "lucide-react";
 import axios from "axios";
-
+import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 interface Patient {
   _id: string;
   name: string;
@@ -24,6 +25,8 @@ interface Role {
 const PatientListing = () => {
   const [patients, setPatients] = useState<Patient[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+
+  const navigate = useNavigate();
 
 
   const [roles, setRoles] = useState<Role[]>([]);
@@ -140,6 +143,17 @@ const PatientListing = () => {
   return (
     <section className="py-12 sm:py-16 bg-white flex justify-center items-center mb-20">
       <div className="container mx-auto px-4 sm:px-6 lg:px-12 max-w-7xl">
+        {/* Back Button */}
+        <div className="hidden md:flex justify-start mb-8">
+          <Button
+            onClick={() => navigate('/admin-dashboard')}
+            className="flex items-center gap-2 bg-primaryBlue text-white"
+          >
+            <ArrowLeft className="w-4 h-4"/>
+            Back
+          </Button>
+        </div>
+
         {/* Heading */}
         <div className="flex items-center justify-center gap-4 mb-8">
           <div className="h-[2px] w-20 bg-darkGray"></div>
