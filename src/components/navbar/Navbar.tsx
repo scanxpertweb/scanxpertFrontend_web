@@ -11,6 +11,7 @@ import {
 import { Menu, X } from "lucide-react";
 import TopBar from "@/components/Topbar/Topbar";
 import { motion } from "framer-motion"; // Import Framer Motion
+import axios from "axios";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -18,14 +19,30 @@ const Navbar = () => {
   const [userName, setUserName] = useState("");
 
   useEffect(() => {
-    // Check authentication status
-    const token = localStorage.getItem("token");
-    const name = localStorage.getItem("userName"); // You'll need to store this during login
+    const fetchUserData = async () => {
+      const token = localStorage.getItem("token");
+      const userId = localStorage.getItem("userId");
 
-    if (token && name) {
-      setIsLoggedIn(true);
-      setUserName(name);
-    }
+      if (token && userId) {
+        try {
+          const response = await axios.get(
+            `${import.meta.env.VITE_API_HOST}/api/auth/user/${userId}`
+          );
+
+          // Store name in localStorage and state
+          localStorage.setItem("userName", response.data.name);
+          setUserName(response.data.name);
+          setIsLoggedIn(true);
+        } catch (err) {
+          console.error("Error fetching user data:", err);
+          // Handle error - maybe logout user if unauthorized
+          localStorage.clear();
+          window.location.reload();
+        }
+      }
+    };
+
+    fetchUserData();
   }, []);
 
   return (
