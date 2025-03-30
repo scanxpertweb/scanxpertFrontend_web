@@ -6,6 +6,10 @@ body {
   font-family: "Montserrat", sans-serif;
 }
 
+.Toastify__toast-container {
+  z-index: 9999;
+}
+
 
 @theme {
   --color-primaryBlue: #0158a9;

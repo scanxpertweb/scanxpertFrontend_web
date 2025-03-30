@@ -19,7 +19,7 @@ function App() {
           success: {
             duration: 3000,
             style: {
-              background: "green",
+              background: "#7CBDEEFF",
               color: "#fff",
             },
           },
