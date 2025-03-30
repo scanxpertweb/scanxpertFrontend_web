@@ -77,6 +77,7 @@ const OnBoardPatient = () => {
           role: "patient",
           report: [],
         });
+        navigate('/admin-dashboard');
       } else {
         toast.error("Failed to onboard: " + (data?.message || "Unknown error"));
       }

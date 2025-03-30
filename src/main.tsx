@@ -23,16 +23,16 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
           success: {
             duration: 3000,
             style: {
-              background: "#7CBDEEFF",
-              color: "#fff",
+              background: "#caf0f8",
+              color: "#ff6b35",
             },
           },
           // Styling for error toasts
           error: {
             duration: 3000,
             style: {
-              background: "#ff4b4b",
-              color: "#fff",
+              background: "#d00000",
+              color: "#000",
             },
           },
         }}
