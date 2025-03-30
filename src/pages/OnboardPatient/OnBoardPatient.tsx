@@ -3,6 +3,7 @@ import { ArrowLeft, Upload, X } from "lucide-react";
 import axios from "axios";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
 const OnBoardPatient = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -42,7 +43,7 @@ const OnBoardPatient = () => {
     e.preventDefault();
 
     if (formData.report.length === 0) {
-      alert("Please upload at least one report.");
+      toast.error("Please upload at least one report.");
       return;
     }
 
@@ -67,8 +68,7 @@ const OnBoardPatient = () => {
       const data = res.data;
 
       if (res.status === 201) {
-        alert("Patient onboarded successfully!");
-        console.log("Response:", data);
+        toast.success("Patient onboarded successfully!");
         setFormData({
           name: "",
           phone: "",
@@ -78,11 +78,11 @@ const OnBoardPatient = () => {
           report: [],
         });
       } else {
-        alert("Failed to onboard: " + (data?.message || "Unknown error"));
+        toast.error("Failed to onboard: " + (data?.message || "Unknown error"));
       }
     } catch (error) {
       console.error("API Error:", error);
-      alert("Something went wrong while onboarding the patient.");
+      toast.error("Something went wrong while onboarding the patient.");
     }
   };
 
