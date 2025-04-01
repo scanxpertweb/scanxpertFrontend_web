@@ -17,9 +17,18 @@ const Hero = () => {
         <div className="container mx-auto flex flex-col md:flex-row items-center md:pr-0 xl:pr-0">
           {/* Left Side - Text Content */}
           <div className="w-full md:w-2/5 text-left p-6 sm:p-8 md:pl-0 xl:pl-4 xl:translate-x-[2%] 2xl:translate-x-[4%]">
-            <h1 className="text-[1.8rem] sm:text-[2.1rem] md:text-[2.55rem] font-bold text-gray-900 mb-4 sm:mb-6 leading-relaxed uppercase">
-              Advanced Imaging Solutions for Dental, Head & Neck Care!{" "}
-            </h1>
+            <div className="relative">
+              <h1 className="text-[1.8rem] sm:text-[2.1rem] md:text-[2.55rem] font-bold text-gray-900 mb-4 sm:mb-6 leading-relaxed uppercase">
+                <span className="relative">
+                  A
+                  <span className="absolute -top-3 left-0 bg-accentOrange text-white text-xs px-2 py-1 transform -rotate-12 rounded">
+                    Opening Soon!
+                  </span>
+                  dvanced
+                </span>
+                {" "}Imaging Solutions for Dental, Head & Neck Care!{" "}
+              </h1>
+            </div>
             <p className="text-base sm:text-lg text-gray-600 mb-6 sm:mb-8 leading-relaxed text-justify">
               Experience precision in Dental, Head & Neck and ENT imaging with
               our advanced X-ray technology like Digital CBCT, OPG , Ceph, TMJ
