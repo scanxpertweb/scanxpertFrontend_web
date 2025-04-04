@@ -167,6 +167,7 @@ const Login = () => {
       if (res.data.exists) {
         const expiryTime = new Date().getTime() + 24 * 60 * 60 * 1000;
         localStorage.setItem("token", res.data.token);
+        localStorage.setItem("name", res.data.name);
         localStorage.setItem("tokenExpiry", expiryTime.toString());
 
         toast.success("Welcome back! Redirecting...");

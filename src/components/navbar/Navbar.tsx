@@ -146,7 +146,7 @@ const Navbar = () => {
                 </div>
               ) : (
                 <Button className="bg-[#0158a9] text-white px-4 py-2 rounded-lg hover:bg-[#014b8f] w-full">
-                  <Link to="/login">Download Reports</Link>
+                  <Link to="/login" onClick={() => setIsOpen(false)}>Download Reports</Link>
                 </Button>
               )}
             </li>
