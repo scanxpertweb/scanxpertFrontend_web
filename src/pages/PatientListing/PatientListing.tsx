@@ -4,7 +4,6 @@ import { Upload, Trash2, Trash, Eye, ArrowLeft, Search } from "lucide-react";
 import axios from "axios";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
-import { format, parseISO } from 'date-fns';
 
 interface Patient {
   _id: string;
@@ -35,23 +34,17 @@ const PatientListing = () => {
   const navigate = useNavigate();
 
   const [roles, setRoles] = useState<Role[]>([]);
-
-  // const formatDate = (dateString: string) => {
-  //   const date = new Date(dateString);
-  //   const day = date.getUTCDate().toString().padStart(2, '0');
-  //   const month = date.toLocaleString('en-US', {
-  //     month: 'long',
-  //     timeZone: 'UTC',
-  //   });
-  //   return `${day} ${month}`;
-  // };
-
-
-const formatDate = (dateString: string) => {
-  return format(parseISO(dateString), "dd MMMM");
-};
-
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    const day = date.getUTCDate().toString().padStart(2, '0');
+    const month = date.toLocaleString('en-US', {
+      month: 'long',
+      timeZone: 'UTC',
+    });
+    return `${day} ${month}`;
+  };
   
+
 
   const fetchPatients = async () => {
     setLoading(true);
