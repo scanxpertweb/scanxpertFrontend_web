@@ -4,7 +4,7 @@ import { Upload, Trash2, Trash, Eye, ArrowLeft, Search } from "lucide-react";
 import axios from "axios";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
-import { format } from "date-fns";
+import moment from 'moment';
 
 interface Patient {
   _id: string;
@@ -37,13 +37,7 @@ const PatientListing = () => {
   const [roles, setRoles] = useState<Role[]>([]);
 
   const formatDate = (dateString: string) => {
-    try {
-      const date = new Date(dateString); // Parse ISO 8601 timestamp directly
-      return format(date, "dd MMMM yyyy"); // Format as "26 March 2024"
-    } catch (error) {
-      console.error("Error parsing date:", error);
-      return "Invalid date";
-    }
+    return moment(dateString).utc().format('DD MMMM YYYY'); // Output: "05 April 2025"
   };
 
   const fetchPatients = async () => {
