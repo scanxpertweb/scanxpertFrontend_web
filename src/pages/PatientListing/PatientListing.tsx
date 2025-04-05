@@ -12,6 +12,7 @@ interface Patient {
   phone: string;
   sex: string;
   age: number;
+  createdAt: string;
   role: {
     _id: string;
     name: string;
@@ -262,7 +263,7 @@ const PatientListing = () => {
                         <td className="px-4 py-3 capitalize">{patient.sex}</td>
                         <td className="px-4 py-3">{patient.age}</td>
                         <td className="px-4 py-3">
-                          {formatDate(patient.role.createdAt)}
+                          {formatDate(patient.createdAt)}
                         </td>
                         <td className="px-4 py-3">
                           <select
