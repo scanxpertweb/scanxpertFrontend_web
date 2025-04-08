@@ -69,7 +69,8 @@ const Contact = () => {
                 {/* Timings */}
                 <div className="flex items-center space-x-3">
                   <Clock className="text-accentOrange" size={24} />
-                  <p className="text-gray-700 text-lg">All Days: 9 AM - 9 PM</p>
+                  {/* <p className="text-gray-700 text-lg">All Days: 9 AM - 9 PM</p> */}
+                  <p className="text-gray-700 text-lg">Opening Soon!</p>
                 </div>
               </div>
             </div>

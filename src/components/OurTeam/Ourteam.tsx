@@ -3,6 +3,7 @@ interface TeamMember {
     name: string;
     position: string;
     education: string;
+    institution?: string;
   }
   
   const teamMembers: TeamMember[] = [
@@ -11,6 +12,7 @@ interface TeamMember {
       name: "Dr. Kamakshi Raina",
       position: "Chief Radiologist",
       education: "BDS, MDS (Oral Medicine & Radiology), FAGE (Fellow of Academy of General Education)",
+      institution: "Manipal College of Dental Sciences, Manipal (MAHE)",
     },
     {
       image: "/images/kapilsir.jpeg",
@@ -55,6 +57,7 @@ interface TeamMember {
   
                 {/* Education */}
                 <p className="text-sm text-center">{member.education}</p>
+                <p className="text-sm text-center">{member.institution}</p>
               </div>
             ))}
           </div>
