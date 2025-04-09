@@ -24,7 +24,8 @@ const Footer = () => {
               <FaFacebook size={20} />
             </a>
             <a
-              href="#"
+              href="https://www.instagram.com/scanxperts?igsh=bDE0cnN6eDhhbG5y&utm_source=qr"
+              target="_blank"
               className="p-2 bg-white text-accentOrange rounded-full hover:opacity-80 transition"
             >
               <FaInstagram size={20} />

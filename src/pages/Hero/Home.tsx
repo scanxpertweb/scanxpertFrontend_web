@@ -9,6 +9,70 @@ import CBCTAwareness from "@/components/AwarenessSection/Awareness";
 import WhyUs from "@/components/WhyUs/whyUs";
 import Testimonials from "@/components/Testimonials/Testimonials";
 import Certification from "@/components/Certification/Certification";
+import { Helmet } from "react-helmet";
+
+<Helmet>
+  <title>Best X-Ray & CBCT Diagnostic Center in Kochi | ScanXperts</title>
+  <meta
+    name="description"
+    content="ScanXperts is a leading diagnostic center in Kochi offering advanced Dental X-Ray, CBCT, OPG, and TMJ imaging. Fast, accurate and affordable diagnostics."
+  />
+  <meta
+    name="keywords"
+    content="X-Ray Kochi, CBCT scan Kerala, Dental imaging Kochi, Diagnostic center Kochi, OPG scan Kerala, TMJ X-ray Kochi, ENT CBCT Kerala"
+  />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://scanxperts.in/home" />
+
+   {/* JSON-LD Schema Markup for rich results */}
+   <script type="application/ld+json">
+    {`
+      {
+        "@context": "https://schema.org",
+        "@type": "DiagnosticLab",
+        "name": "ScanXperts Diagnostics",
+        "image": "https://scanxperts.in/images/meta-preview.jpg",
+        "url": "https://scanxperts.in",
+        "telephone": "+918891240082",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Plot No. 475, 11th Cross Road, Panampilly Nagar",
+          "addressLocality": "Kochi",
+          "addressRegion": "Kerala",
+          "postalCode": "682036",
+          "addressCountry": "IN"
+        },
+        "description": "ScanXperts is a leading diagnostic imaging center in Kochi providing high-resolution dental and ENT scans including CBCT, OPG, TMJ and more.",
+        "openingHours": "Mo-Sa 09:00-18:00",
+        "sameAs": [
+          "https://www.instagram.com/scanxperts"
+        ]
+      }
+    `}
+  </script>
+
+  {/* Open Graph Tags for social sharing */}
+  <meta
+    property="og:title"
+    content="Best CBCT & X-Ray Clinic in Kochi - ScanXperts"
+  />
+  <meta
+    property="og:description"
+    content="Accurate and advanced dental & ENT imaging in Kochi. Visit ScanXperts for precise diagnostics."
+  />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://scanxperts.in/home" />
+  <meta property="og:image" content="/images/meta-preview.jpg" />
+
+  {/* Twitter Card */}
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="X-Ray & CBCT Kochi - ScanXperts" />
+  <meta
+    name="twitter:description"
+    content="Advanced imaging solutions in Kochi for dental, head and neck diagnostics."
+  />
+  <meta name="twitter:image" content="/images/meta-preview.jpg" />
+</Helmet>;
 
 const Hero = () => {
   return (
@@ -25,8 +89,8 @@ const Hero = () => {
                     Opening Soon!
                   </span>
                   dvanced
-                </span>
-                {" "}Imaging Solutions for Dental, Head & Neck Care!{" "}
+                </span>{" "}
+                Imaging Solutions for Dental, Head & Neck Care!{" "}
               </h1>
             </div>
             <p className="text-base sm:text-lg text-gray-600 mb-6 sm:mb-8 leading-relaxed text-justify">
