@@ -1,29 +1,29 @@
 // Dummy Testimonials Data
 export const testimonials = [
     {
-      name: "Dr. Sarah Patel",
+      name: "Dr. Krishna Nanaware",
       feedback:
-        "The CBCT scan at this clinic was extremely precise and helped me plan my dental implant with confidence. Highly recommended!",
+        "I refer all my cases for OPG and CBCT to this center. The Doctors are very helfull & responsive. And Thryvare quick to reports.",
     },
     {
-      name: "Rajesh Menon",
+      name: "Jackson James",
       feedback:
-        "Excellent service! The staff was friendly, and the scan process was quick and comfortable. Great experience overall.",
+        "Truly  one of the best x-ray centers in Kochi. I had a TMJ Problem  for which I was told to  get a CBCT. Good service overall and Prompt reports.",
     },
     {
-      name: "Lisa Fernandez",
+      name: "Ramu Raj",
       feedback:
-        "Loved the professionalism and care at this clinic. The detailed scan report helped my orthodontist plan my treatment better.",
+        "The Only dedicated Head & Neck x-ray center in Kochi. Efficient staff . Got my OPG print in 5 minutes. Highly recommended.",
     },
     {
-      name: "Dr. John Doe",
+      name: "Dr. Meenakshi Gopikishan",
       feedback:
-        "The CBCT scan was incredibly accurate and provided a comprehensive view of my dental structure.",
+        "Nice center. I went for for CBCT before my dental implant appointment. Scan took only a few minutes. Report was mailed to me & my dentist. ",
     },
     {
-      name: "Dr. Jane Smith",
+      name: "Adnaan Ahamed",
       feedback:
-        "I had a great experience with the team at this clinic. The staff was professional and the scan results were very detailed.",
+        "I came all the way from Mangalore to get the face scan done. Got the report very Quickly and they are very helpful.",
     },
     
   ];

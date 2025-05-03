@@ -19,13 +19,18 @@ import { Helmet } from "react-helmet";
   />
   <meta
     name="keywords"
-    content="X-Ray Kochi, CBCT scan Kerala, Dental imaging Kochi, Diagnostic center Kochi, OPG scan Kerala, TMJ X-ray Kochi, ENT CBCT Kerala"
+    content="Kochi, dentists, dentists in kochi, Best xray near me, mouth xray near me, 
+    scan center, dental scan kochi, OPG, CBCT near me, CBCT kochi, dental Implant, 
+    maxillofacial scan, dental scan center in kochi, dental scan center in kerala, 
+    dental scan kochi,  scanxperts, scanxperts kochi, scanxperts kerala, 
+    X-Ray Kochi, CBCT scan Kerala, Dental imaging Kochi, Diagnostic center Kochi, 
+    OPG scan Kerala, TMJ X-ray Kochi, ENT CBCT Kerala"
   />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://scanxperts.in/home" />
 
-   {/* JSON-LD Schema Markup for rich results */}
-   <script type="application/ld+json">
+  {/* JSON-LD Schema Markup for rich results */}
+  <script type="application/ld+json">
     {`
       {
         "@context": "https://schema.org",
