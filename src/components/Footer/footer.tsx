@@ -114,7 +114,7 @@ const Footer = () => {
               </a>
             </li>
             <li className="flex items-center gap-2">
-              <a href="https://maps.app.goo.gl/dJ42z4MMHf19SAhHA" target="_blank" className="flex items-center gap-2 hover:underline hover:text-accentOrange transition">
+              <a href="https://maps.app.goo.gl/3Way5iRTCK8Y1bG3A" target="_blank" className="flex items-center gap-2 hover:underline hover:text-accentOrange transition">
                 <MapPin size={16} className="text-accentOrange" /> Plot No. 475, 11th Cross Road,
                 <br /> Panampilly Nagar, Kochi, Kerala, <br />
                 India

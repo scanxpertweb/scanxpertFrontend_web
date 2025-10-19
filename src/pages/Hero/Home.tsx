@@ -90,8 +90,8 @@ const Hero = () => {
               <h1 className="text-[1.8rem] sm:text-[2.1rem] md:text-[2.55rem] font-bold text-gray-900 mb-4 sm:mb-6 leading-relaxed uppercase">
                 <span className="relative">
                   A
-                  <span className="absolute -top-3 left-0 bg-accentOrange text-white text-xs px-2 py-1 transform -rotate-12 rounded">
-                    Opening Soon!
+                  <span className="absolute -top-3 left-0 bg-green-500 text-white text-xs px-2 py-1 transform -rotate-12 rounded shadow-lg animate-pulse">
+                    Now Open!
                   </span>
                   dvanced
                 </span>{" "}
@@ -127,7 +127,7 @@ const Hero = () => {
                 11th Cross Road, Panampilly Nagar, Kochi, Kerala, India
               </p>
               <a
-                href="https://maps.app.goo.gl/dJ42z4MMHf19SAhHA"
+                href="https://maps.app.goo.gl/3Way5iRTCK8Y1bG3A"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-blue-500 hover:underline flex items-center gap-2 text-base sm:text-lg"
