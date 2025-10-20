@@ -23,7 +23,7 @@ const Contact = () => {
               <iframe
                 title="Clinic Location"
                 className="w-full h-full rounded-lg shadow-lg"
-                src="https://maps.app.goo.gl/3Way5iRTCK8Y1bG3A"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3929.521982886446!2d76.29474417479435!3d9.960315390080893!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b08732382457031%3A0xe57e58d14cfe0cb9!2sScanXperts!5e0!3m2!1sen!2sin!4v1729468900000!5m2!1sen!2sin"
                 allowFullScreen
                 loading="lazy"
               ></iframe>
@@ -79,7 +79,7 @@ const Contact = () => {
                   <Clock className="text-green-500" size={24} />
                   <div className="flex flex-col">
                     <p className="text-gray-700 text-lg font-semibold">
-                      Mon-Sat: 9:00 AM - 6:00 PM
+                      Mon-Sat: 10:30 AM - 5:30 PM
                     </p>
                     <p className="text-green-600 text-sm font-bold flex items-center gap-1">
                       <span className="inline-block w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>

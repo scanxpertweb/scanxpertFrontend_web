@@ -21,7 +21,7 @@ const TopBar = () => {
         </div>
         <div className="flex items-center space-x-1 sm:space-x-2">
           <Clock size={16} />
-          <span>Mon-Sat: 10:00 AM - 6:00 PM</span>
+          <span>Mon-Sat: 10:30 AM - 5:30 PM</span>
         </div>
       </div>
     </div>
