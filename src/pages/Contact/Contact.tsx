@@ -77,15 +77,9 @@ const Contact = () => {
                 {/* Timings */}
                 <div className="flex items-center space-x-3">
                   <Clock className="text-green-500" size={24} />
-                  <div className="flex flex-col">
-                    <p className="text-gray-700 text-lg font-semibold">
-                      Mon-Sat: 10:30 AM - 6:00 PM
-                    </p>
-                    <p className="text-green-600 text-sm font-bold flex items-center gap-1">
-                      <span className="inline-block w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-                      Now Open, Visit Us!
-                    </p>
-                  </div>
+                  <p className="text-gray-700 text-lg font-semibold">
+                    Daily: 10:00 AM - 7:00 PM
+                  </p>
                 </div>
               </div>
             </div>
